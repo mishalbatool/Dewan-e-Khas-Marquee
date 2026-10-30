@@ -9,12 +9,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   return (
     <section className="relative min-h-[92vh] lg:min-h-screen flex flex-col justify-between overflow-hidden bg-[#123B32]">
       {/* Background Cinematic Image with measured scrim overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 bg-[#123B32]">
         <img
-          src="/src/assets/images/hero_dewan_marquee_1793357124955.jpg"
+          src="/images/hero-marquee.jpg"
           alt="DEWAN-E-KHAS Royal Wedding Marquee Hall Interior"
           className="w-full h-full object-cover object-center scale-105 animate-pulse duration-[8000ms]"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            // Fallback to high quality luxury wedding marquee if primary fails
+            const target = e.currentTarget;
+            if (target.src.indexOf('unsplash') === -1) {
+              target.src = 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=2000&q=80';
+            }
+          }}
         />
         {/* Multilayered luxury gradient scrim */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#123B32] via-[#123B32]/70 to-[#123B32]/60" />

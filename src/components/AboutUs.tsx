@@ -19,10 +19,16 @@ export const AboutUs: React.FC<AboutUsProps> = ({ onOpenBooking }) => {
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-[#E9DFCE] group">
               <img
-                src="/src/assets/images/about_grand_venue_1793357125369.jpg"
+                src="/images/venue-exterior.jpg"
                 alt="DEWAN-E-KHAS Marquee Pavilion Exterior at Twilight"
                 className="w-full h-[400px] sm:h-[480px] lg:h-[540px] object-cover group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src.indexOf('unsplash') === -1) {
+                    target.src = 'https://images.unsplash.com/photo-1545232979-fbf68fe9b1af?auto=format&fit=crop&w=1200&q=80';
+                  }
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 

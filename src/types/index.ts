@@ -4,6 +4,7 @@ export interface GalleryItem {
   category: 'all' | 'hall' | 'stage' | 'dining' | 'lighting' | 'mehndi';
   categoryLabel: string;
   image: string;
+  fallback?: string;
   description: string;
 }
 
@@ -13,6 +14,7 @@ export interface EventCardItem {
   urduSubtitle?: string;
   description: string;
   image: string;
+  fallback?: string;
   highlights: string[];
 }
 

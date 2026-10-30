@@ -12,7 +12,8 @@ const eventTypes: EventCardItem[] = [
     title: 'Wedding Ceremonies (Barat)',
     urduSubtitle: 'بارات و شادی کی تقریبات',
     description: 'A grand royal setting for the main wedding reception. Featuring opulent floral bridal stages, majestic red carpet entryways, and climate-controlled luxury halls for the bride, groom, and esteemed guests.',
-    image: '/src/assets/images/gallery_stage_decor_1793357126867.jpg',
+    image: '/images/stage-decor.jpg',
+    fallback: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Grand Bridal Stage', 'Royal Red Carpet Entry', 'Spacious Seating Capacity']
   },
   {
@@ -20,7 +21,8 @@ const eventTypes: EventCardItem[] = [
     title: 'Walima Celebrations',
     urduSubtitle: 'ولیمہ کی پروقار تقریب',
     description: 'An atmosphere of sophisticated grace and serene beauty. Styled in soft champagne, ivory, and crystal palettes with reflective mirror aisles and impeccable banquet dining layouts.',
-    image: '/src/assets/images/events_walima_elegance_1793357147728.jpg',
+    image: '/images/walima.jpg',
+    fallback: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Champagne & Ivory Elegance', 'Mirrored Aisle Setup', 'Fine Dining Layouts']
   },
   {
@@ -28,7 +30,8 @@ const eventTypes: EventCardItem[] = [
     title: 'Engagement Events',
     urduSubtitle: 'منگنی کی تقریب',
     description: 'Intimate and romantic ceremonies surrounded by close family and friends. Curated floral ring backdrops, ambient fairy lighting, and comfortable lounge seating for heartfelt moments.',
-    image: '/src/assets/images/events_engagement_reception_1793357146917.jpg',
+    image: '/images/engagement.jpg',
+    fallback: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Intimate Floral Arches', 'Fairy Light Ambience', 'Family Lounge Styling']
   },
   {
@@ -36,7 +39,8 @@ const eventTypes: EventCardItem[] = [
     title: 'Mehndi Functions',
     urduSubtitle: 'مہندی و مایوں کا جشن',
     description: 'Vibrant, festive, and colorful celebrations filled with joy and cultural tradition. Decorated with golden marigolds, traditional brass lanterns, royal diwans, and dance floor arrangements.',
-    image: '/src/assets/images/events_mehndi_celebration_1793357127724.jpg',
+    image: '/images/mehndi.jpg',
+    fallback: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Marigold & Floral Canopies', 'Traditional Royal Diwan', 'Festive Music & Lighting']
   },
   {
@@ -44,7 +48,8 @@ const eventTypes: EventCardItem[] = [
     title: 'Family Celebrations & Get-Togethers',
     urduSubtitle: 'خاندانی تقریبات و دعوتیں',
     description: 'Milestone anniversaries, birthday banquets, Qawwali nights, and reunion dinners hosted in an atmosphere of warmth, supreme comfort, and distinguished culinary hospitality.',
-    image: '/src/assets/images/gallery_table_banquet_1793357128177.jpg',
+    image: '/images/banquet-tables.jpg',
+    fallback: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=80',
     highlights: ['Versatile Dining Configurations', 'Dedicated Hospitality', 'Private & Secure Setting']
   },
   {
@@ -52,7 +57,8 @@ const eventTypes: EventCardItem[] = [
     title: 'Special Events & Corporate Dinners',
     urduSubtitle: 'خصوصی تقریبات و سیمینارز',
     description: 'Executive dinners, institutional gatherings, award ceremonies, and high-profile community receptions requiring audio-visual support, grand capacity, and refined protocol.',
-    image: '/src/assets/images/hero_dewan_marquee_1793357124955.jpg',
+    image: '/images/hero-marquee.jpg',
+    fallback: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80',
     highlights: ['High-Capacity Hall', 'Audio-Visual Preparedness', 'Ample Parking & Highway Access']
   }
 ];
@@ -91,6 +97,13 @@ export const Events: React.FC<EventsProps> = ({ onOpenBooking }) => {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     referrerPolicy="no-referrer"
                     loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (event.fallback && target.src !== event.fallback) {
+                        target.src = event.fallback;
+                      }
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
 

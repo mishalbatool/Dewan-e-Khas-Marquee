@@ -8,7 +8,8 @@ const galleryItems: GalleryItem[] = [
     title: 'Grand Marquee Royal Interior',
     category: 'hall',
     categoryLabel: 'Grand Hall',
-    image: '/src/assets/images/hero_dewan_marquee_1793357124955.jpg',
+    image: '/images/hero-marquee.jpg',
+    fallback: 'https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80',
     description: 'Breathtaking draped ceiling with emerald and ivory silks, high-capacity banquet layout, and gleaming marble walkway.'
   },
   {
@@ -16,7 +17,8 @@ const galleryItems: GalleryItem[] = [
     title: 'Royal Emerald & Floral Bridal Stage',
     category: 'stage',
     categoryLabel: 'Stage Decor',
-    image: '/src/assets/images/gallery_stage_decor_1793357126867.jpg',
+    image: '/images/stage-decor.jpg',
+    fallback: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80',
     description: 'Lavish floral arch with thousands of white roses, hydrangeas, ornate carved gold settee, and crystal lanterns.'
   },
   {
@@ -24,7 +26,8 @@ const galleryItems: GalleryItem[] = [
     title: 'Luxury Wedding Table & Seating Arrangements',
     category: 'dining',
     categoryLabel: 'Seating & Dining',
-    image: '/src/assets/images/gallery_table_banquet_1793357128177.jpg',
+    image: '/images/banquet-tables.jpg',
+    fallback: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?auto=format&fit=crop&w=1200&q=80',
     description: 'Champagne gold charger plates, crystal glassware, emerald green napkins, and tall orchid candlelit centerpieces.'
   },
   {
@@ -32,7 +35,8 @@ const galleryItems: GalleryItem[] = [
     title: 'Cascading Tiered Crystal Chandeliers',
     category: 'lighting',
     categoryLabel: 'Lighting & Chandeliers',
-    image: '/src/assets/images/gallery_chandeliers_lighting_1793357146727.jpg',
+    image: '/images/chandeliers.jpg',
+    fallback: 'https://images.unsplash.com/photo-1543807535-eceef0bc6599?auto=format&fit=crop&w=1200&q=80',
     description: 'Magnificent warm golden illumination suspended from draped silks, creating an enchanting royal canopy.'
   },
   {
@@ -40,7 +44,8 @@ const galleryItems: GalleryItem[] = [
     title: 'Walima Mirrored Runway & Ivory Stage',
     category: 'stage',
     categoryLabel: 'Stage Decor',
-    image: '/src/assets/images/events_walima_elegance_1793357147728.jpg',
+    image: '/images/walima.jpg',
+    fallback: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?auto=format&fit=crop&w=1200&q=80',
     description: 'Understated royal elegance with champagne drapery, crystal candelabras, and reflective mirrored aisle.'
   },
   {
@@ -48,7 +53,8 @@ const galleryItems: GalleryItem[] = [
     title: 'Romantic Floral Arch Engagement Setting',
     category: 'stage',
     categoryLabel: 'Stage Decor',
-    image: '/src/assets/images/events_engagement_reception_1793357146917.jpg',
+    image: '/images/engagement.jpg',
+    fallback: 'https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80',
     description: 'Blush rose ring arch, fairy light curtain, plush velvet seating, and candlelit walkways.'
   },
   {
@@ -56,7 +62,8 @@ const galleryItems: GalleryItem[] = [
     title: 'Vibrant Mehndi Celebration & Royal Diwan',
     category: 'mehndi',
     categoryLabel: 'Festive Mehndi',
-    image: '/src/assets/images/events_mehndi_celebration_1793357127724.jpg',
+    image: '/images/mehndi.jpg',
+    fallback: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80',
     description: 'Marigold and jasmine garlands, brass lanterns, richly embroidered cushions, and warm fairy lights canopy.'
   },
   {
@@ -64,7 +71,8 @@ const galleryItems: GalleryItem[] = [
     title: 'Grand Entrance & Twilight Pavilion',
     category: 'hall',
     categoryLabel: 'Grand Hall',
-    image: '/src/assets/images/about_grand_venue_1793357125369.jpg',
+    image: '/images/venue-exterior.jpg',
+    fallback: 'https://images.unsplash.com/photo-1545232979-fbf68fe9b1af?auto=format&fit=crop&w=1200&q=80',
     description: 'Illuminated arched entrance, welcoming red carpet, landscaped fountains, and royal evening aura on Jhang-Chiniot Road.'
   }
 ];
@@ -158,6 +166,13 @@ export const Gallery: React.FC = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                   loading="lazy"
+                  decoding="async"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (item.fallback && target.src !== item.fallback) {
+                      target.src = item.fallback;
+                    }
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
@@ -243,6 +258,13 @@ export const Gallery: React.FC = () => {
                   alt={filteredItems[lightboxIndex].title}
                   className="max-h-[70vh] w-auto object-contain mx-auto"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    const current = filteredItems[lightboxIndex];
+                    if (current?.fallback && target.src !== current.fallback) {
+                      target.src = current.fallback;
+                    }
+                  }}
                 />
               </div>
 
