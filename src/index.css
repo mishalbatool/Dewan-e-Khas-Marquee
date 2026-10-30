@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --emerald-deep: #123B32;
+    --emerald-darker: #0c2620;
+    --gold-champagne: #C6A15B;
+    --gold-light: #DFC07C;
+    --ivory-warm: #FAF7F0;
+    --charcoal-dark: #202522;
+    --beige-soft: #E9DFCE;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #FAF7F0;
+    color: #202522;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-serif-luxury {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-royal {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+/* Custom subtle luxury scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #C6A15B;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A88440;
+}
+
+/* Gold gradient utility */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #DFC07C 0%, #C6A15B 50%, #B38E46 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #DFC07C 0%, #C6A15B 50%, #B38E46 100%);
+}
+
+.emerald-gradient-bg {
+  background: linear-gradient(160deg, #123B32 0%, #0d2822 100%);
+}
